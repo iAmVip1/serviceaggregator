@@ -8,6 +8,7 @@ import Signup from './pages/Signup'
 import MyBooking from './pages/MyBooking'
 import Select from './pages/Select'
 import Header from './components/Header'
+import Admin from './pages/Admin'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
     <Route path='/select' element={<Select />} />
     <Route path='/signin' element={<Signin />} />
     <Route path='/signup' element={<Signup />} />
+    <Route path='/admin' element={<Admin />} />
     
    </Routes>
    </BrowserRouter>
