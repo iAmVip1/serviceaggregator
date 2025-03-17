@@ -1,10 +1,45 @@
-import React from "react";
-
-
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react'
 
 
 export default function Signin() {
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage]= useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+    const handleChange = (e) => {
+      setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+     
+    };
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (!formData.email || !formData.password) {
+        return setErrorMessage('Please fill out all fields.');
+      }
+      try {
+        setLoading(true);
+        setErrorMessage(null);
+        const res = await fetch('/api/auth/signin', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+        const data = await res.json();
+        if (data.success === false) {
+          setLoading(false);
+          return setErrorMessage(data.message);
+          
+        }
+        setLoading(false);
+        if(res.ok) {
+          navigate('/');
+        }
+      } catch (error) {
+        setErrorMessage(error.message);
+        setLoading(false);
+      }
+    }
+  
   return (
 <div className="flex items-center justify-center min-h-screen">
       <div className="md:bg-slate-200 p-8 rounded-lg shadow-lg flex w-2/3 max-w-4xl sm:w-fit sm:ml-5 sm:mr-5 sm:bg-transparent">
@@ -15,22 +50,34 @@ export default function Signin() {
         {/* Right Side - Form */}
         <div className="w-1/2 p-6">
           <h2 className="text-2xl font-bold text-gray-800 text-center">Sign In</h2>
-          <p className="text-gray-600 text-center mb-4">Unlock your world.</p>
-          <form>
+          <p className="text-gray-600 text-center mb-4">Sign in for further</p>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 font-semibold">Email</label>
-              <input type="email" className="w-full px-4 py-2 border rounded-md " placeholder="Enter your email" required />
+              <input type="email" className="w-full px-4 py-2 border rounded-md " placeholder="Enter your email" id="email"
+              onChange={handleChange} />
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 font-semibold">Password</label>
-              <input type="password" className="w-full px-4 py-2 border rounded-md " placeholder="Enter your password" required />
+              <input type="password" className="w-full px-4 py-2 border rounded-md " placeholder="Enter your password" id="password"
+              onChange={handleChange} />
             </div>
-            <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">Sign In</button>
+            <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+            disabled={loading}>{
+              loading ? 'Loading...' : 'Login'
+            }</button>
           
           </form>
           <p className="text-center text-gray-600 mt-4">
           Don't have an account? <Link to='/signup' className="text-blue-500">Create an account</Link>
           </p>
+          {
+            errorMessage && (
+              <div className='p-4 mt-2 mb-4 text-sm text-red-600 rounded-lg bg-red-100 " role="alert'>
+                <span className="font-medium">Error!</span> {errorMessage}
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
