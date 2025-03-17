@@ -9,6 +9,7 @@ import MyBooking from './pages/MyBooking'
 import Select from './pages/Select'
 import Header from './components/Header'
 import Admin from './pages/Admin'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
     <Route path='/admin' element={<Admin />} />
     
    </Routes>
+   <Footer />
    </BrowserRouter>
   )
 }
