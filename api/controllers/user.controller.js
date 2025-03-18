@@ -1,6 +1,7 @@
 import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 import User from '../models/user.model.js';
+import Application from '../models/application.model.js';
 
 export const test = (req, res) => {
     res.json({message: 'API is working'})
@@ -76,4 +77,17 @@ try {
 } catch (error) {
   next(error);
 }
+}
+
+export const getUserApplications = async (req, res, next) => {
+  if (req.user.id === req.params.id) {
+    try {
+      const applications = await Application.find({ userRef: req.params.id});
+      res.status(200).json(applications);
+    } catch (error) {
+      next (error)
+    }
+  } else {
+    return next (errorHandler(401, 'You can only view your own applications!'));
+  }
 }
