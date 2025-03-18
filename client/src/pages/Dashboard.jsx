@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DashSidebar from "../components/DashSidebar";
 import DashProfile from "../components/DashProfile";
+import DashBooking from "../components/DashBooking";
+import DashDocuments from "../components/DashDocuments";
 
 
 export default function Dashboard() {
@@ -25,7 +27,10 @@ export default function Dashboard() {
     {/* Main Content */}
     <div className="flex-1 p-6">
       {tab === "profile" && <DashProfile />}
+      {tab === "mybooking" && <DashBooking />}
+      {tab === "documents" && <DashDocuments />}
     </div>
+
   </div>
   )
 }
