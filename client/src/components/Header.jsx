@@ -1,9 +1,29 @@
 import { Link, NavLink } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
+import { signoutSuccess } from '../redux/user/userSlice';
 
 export default function Header() {
   const dispatch= useDispatch()
   const {currentUser} = useSelector(state => state.user);
+  const handleSignout = async () =>{
+    try {
+      const res = await fetch('/api/user/signout', 
+        {
+          method: 'POST'
+
+        }  
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   return (
     
@@ -63,18 +83,25 @@ className='sm:hidden md:block' type="button">
     </div>
     <ul className="py-2 text-sm text-white " aria-labelledby="dropdownInformationButton">
       <li>
-        <a href="#" className="block px-4 py-2 hover:bg-gray-600">Profile</a>
+      <Link to={'/dashboard?tab=profile'}>
+        <div className="block px-4 py-2 hover:bg-gray-600">Profile</div>
+        </Link>
       </li>
       <li>
-        <a href="#" className="block px-4 py-2 hover:bg-gray-600">Documents</a>
+      <Link to={'/dashboard?tab=mybooking'}>
+        <div className="block px-4 py-2 hover:bg-gray-600">Documents</div>
+        </Link>
       </li>
       <li>
-        <a href="#" className="block px-4 py-2 hover:bg-gray-600">My Bookings</a>
+      <Link to={'/dashboard?tab=documents'}>
+        <div className="block px-4 py-2 hover:bg-gray-600">My Bookings</div>
+        </Link>
       </li>
       
     </ul>
     <div className="py-2">
-      <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+      <div className="block px-4 py-2 text-sm text-white hover:bg-gray-600 "
+      onClick={handleSignout}>Sign out</div>
     </div>
 </div>
 
