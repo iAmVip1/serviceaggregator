@@ -1,27 +1,16 @@
 import { Link, NavLink } from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux';
 
 export default function Header() {
-  return (
-    <header className='bg-slate-200 shadow-md'>
-      {/* <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
+  const dispatch= useDispatch()
+  const {currentUser} = useSelector(state => state.user);
 
-      <Link to='/' className='font-bold text-sm sm:text-xl flex flex-wrap'>
-        
-        <img src="https://github.com/iAmVip1/serviceaggregator/blob/main/images/logo2.png?raw=true" alt="logo"
-        className="h-18" />
-        <span className='text-amber-500 px-2 mt-7 sm:mt-5'>Service </span>
-        <span className="mt-7 sm:mt-5"> Aggregator</span>
-      </Link>
-      <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
-        <input type="text" placeholder='Search...' className='bg-transparent border border-none 
-        focus:outline-none h-3 w-24 sm:w-64' />
-        <FaSearch />
-      </form>
-      
-      </div> */}
+  return (
+    
+    <header className='bg-slate-200 shadow-md'>
+
       <>
       
-
 <nav className="border-gray-200 ">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <Link to='/' className='font-bold text-sm sm:text-xl flex flex-wrap'>
@@ -31,7 +20,10 @@ export default function Header() {
         <span className='text-amber-500 px-2 mt-7 sm:mt-5'>Service </span>
         <span className="mt-7 sm:mt-5"> Aggregator</span>
       </Link>
-    <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+      
+      
+
+    <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark" aria-controls="navbar-default" aria-expanded="false">
         <span className="sr-only">Open main menu</span>
         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
@@ -51,6 +43,51 @@ export default function Header() {
         <NavLink to='/about' className={({ isActive }) => isActive ?"block py-2 px-3 text-black bg-gray-400 rounded-sm md:bg-transparent md:text-gray-400 md:p-0" :
           "block py-2 px-3 text-black rounded-sm hover:bg-gray-700 hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-gray-400 md:p-0 "} >About</NavLink>
         </li>
+        {currentUser ? (
+          <>
+        <li>
+          {/* dropdown */}
+
+        
+
+<button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
+className='sm:hidden md:block' type="button">
+  <img className='rounded-full h-7 w-7 ring-2 ring-gray-300' src={currentUser.profilePicture} alt="" /> 
+  
+</button>
+
+<div id="dropdownInformation" class="z-10 hidden bg-gray-700 divide-y divide-gray-100 rounded-lg shadow-sm w-44 ">
+    <div class="px-4 py-3 text-sm text-white ">
+      <div>{currentUser.username}</div>
+      <div class="font-medium truncate">{currentUser.email}</div>
+    </div>
+    <ul class="py-2 text-sm text-white " aria-labelledby="dropdownInformationButton">
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-600">Profile</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-600">Documents</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-600">My Bookings</a>
+      </li>
+      
+    </ul>
+    <div class="py-2">
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+    </div>
+</div>
+
+
+          {/* dropdown */}
+        </li>
+        <li>
+        <NavLink to='/profile' className={({ isActive }) => isActive ?"block py-2 px-3 text-black bg-gray-400 rounded-sm md:hidden" :
+          "block py-2 px-3 text-black rounded-sm hover:bg-gray-700 hover:text-white md:hidden "} >Profile</NavLink>
+        </li>
+        </>
+        ):(
+          <>
         <li>
         <NavLink to='/signin' className={({ isActive }) => isActive ?"block py-2 px-3 text-black bg-gray-400 rounded-sm md:bg-transparent md:text-gray-400 md:p-0" :
           "block py-2 px-3 text-black rounded-sm hover:bg-gray-700 hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-gray-400 md:p-0 "} >Login</NavLink>
@@ -59,6 +96,8 @@ export default function Header() {
         <NavLink to='/admin' className={({ isActive }) => isActive ?"block py-2 px-3 text-black bg-gray-400 rounded-sm md:bg-transparent md:text-gray-400 md:p-0" :
           "block py-2 px-3 text-black rounded-sm hover:bg-gray-700 hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-gray-400 md:p-0 "} >Admin Login</NavLink>
         </li>
+        </>
+        )}
         
         
       </ul>
