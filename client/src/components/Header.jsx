@@ -56,25 +56,25 @@ className='sm:hidden md:block' type="button">
   
 </button>
 
-<div id="dropdownInformation" class="z-10 hidden bg-gray-700 divide-y divide-gray-100 rounded-lg shadow-sm w-44 ">
-    <div class="px-4 py-3 text-sm text-white ">
+<div id="dropdownInformation" className="z-10 hidden bg-gray-700 divide-y divide-gray-100 rounded-lg shadow-sm w-44 ">
+    <div className="px-4 py-3 text-sm text-white ">
       <div>{currentUser.username}</div>
-      <div class="font-medium truncate">{currentUser.email}</div>
+      <div className="font-medium truncate">{currentUser.email}</div>
     </div>
-    <ul class="py-2 text-sm text-white " aria-labelledby="dropdownInformationButton">
+    <ul className="py-2 text-sm text-white " aria-labelledby="dropdownInformationButton">
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-600">Profile</a>
+        <a href="#" className="block px-4 py-2 hover:bg-gray-600">Profile</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-600">Documents</a>
+        <a href="#" className="block px-4 py-2 hover:bg-gray-600">Documents</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-600">My Bookings</a>
+        <a href="#" className="block px-4 py-2 hover:bg-gray-600">My Bookings</a>
       </li>
       
     </ul>
-    <div class="py-2">
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+    <div className="py-2">
+      <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
     </div>
 </div>
 
