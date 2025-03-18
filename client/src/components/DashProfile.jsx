@@ -4,22 +4,27 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess } from '../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function DashProfile() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploading, setimageFileUploading] = useState(false);
+  const [updateUserSuccess, setupdateUserSuccess] = useState(null);
+  const [updateUserError, setupdateUserError] = useState(null);
+  const [ShowModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
+  const dispatch = useDispatch();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        setImageFileUploadError('File size exceeds 2MB');
-        return;
-      }
       setImageFile(file);
       setImageFileUrl(URL.createObjectURL(file));
     }
@@ -33,7 +38,9 @@ export default function DashProfile() {
 
   const uploadImage = async () => {
     console.log('Uploading image ...');
+    setimageFileUploading(true);
     setImageFileUploadError(null);
+
     const storage = getStorage(app);
     const fileName = new Date().getTime() + imageFile.name;
     const storageRef = ref(storage, fileName);
@@ -50,19 +57,92 @@ export default function DashProfile() {
         setImageFileUploadProgress(null);
         setImageFile(null);
         setImageFileUrl(null);
+        setimageFileUploading(false);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setImageFileUrl(downloadURL);
-          // You can dispatch here to update Redux state if necessary
+          setFormData({ ...formData, profilePicture: downloadURL });
+          setimageFileUploading(false);
         });
       }
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the form submission logic here (e.g., updating user details)
+    setupdateUserError(null);
+    setupdateUserSuccess(null);
+
+    if (Object.keys(formData).length === 0) {
+      setupdateUserError('No changes made');
+      return;
+    }
+
+    if (imageFileUploading) {
+      setupdateUserError('Please wait for image to upload');
+      return;
+    }
+
+    try {
+      dispatch(updateStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(updateFailure(data.message));
+        setupdateUserError(data.message);
+      } else {
+        dispatch(updateSuccess(data));
+        setupdateUserSuccess("User's profile updated successfully ");
+      }
+    } catch (error) {
+      dispatch(updateFailure(error.message));
+      setupdateUserError(error.message);
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    setShowModal(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data.message));
+      } else {
+        dispatch(deleteUserSuccess(data));
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch('/api/user/signout', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -71,16 +151,27 @@ export default function DashProfile() {
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         {/* Profile Picture */}
-        <div className="w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full">
-          <div className="relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full" onClick={() => filePickerRef.current.click()}>
+        <div className="w-32 h-32 sm:w-24 sm:h-24 self-center cursor-pointer shadow-md overflow-hidden rounded-full">
+          <div
+            className="relative w-32 h-32 sm:w-24 sm:h-24 self-center cursor-pointer shadow-md overflow-hidden rounded-full"
+            onClick={() => filePickerRef.current.click()}
+          >
             {imageFileUploadProgress && (
               <CircularProgressbar
                 value={imageFileUploadProgress || 0}
                 text={`${imageFileUploadProgress}%`}
                 strokeWidth={5}
                 styles={{
-                  root: { width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 },
-                  path: { stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})` },
+                  root: {
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                  },
+                  path: {
+                    stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})`,
+                  },
                 }}
               />
             )}
@@ -98,7 +189,10 @@ export default function DashProfile() {
             hidden
           />
           {imageFileUploadError && (
-            <div className="p-4 mt-2 mb-4 text-sm text-red-600 rounded-lg bg-red-100" role="alert">
+            <div
+              className="p-4 mt-2 mb-4 text-sm text-red-600 rounded-lg bg-red-100"
+              role="alert"
+            >
               <span className="font-medium">Error!</span> {imageFileUploadError}
             </div>
           )}
@@ -109,7 +203,8 @@ export default function DashProfile() {
           type="text"
           id="username"
           placeholder="Username"
-          defaultValue={currentUser.username}
+          value={formData.username || currentUser.username}
+          onChange={handleChange}
           className="p-2 border rounded-md w-full"
         />
 
@@ -118,8 +213,9 @@ export default function DashProfile() {
           type="text"
           id="email"
           placeholder="Email"
-          defaultValue={currentUser.email}
-          className="p-2 border rounded-md w-full"
+          value={formData.email || currentUser.email}
+          onChange={handleChange}
+          className="p-2 border rounded-md w-full" disabled
         />
 
         {/* Password */}
@@ -127,20 +223,57 @@ export default function DashProfile() {
           type="password"
           id="password"
           placeholder="Password"
+          onChange={handleChange}
           className="p-2 border rounded-md w-full"
         />
 
         {/* Update Button */}
-        <button type="submit" className="p-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+        <button
+          type="submit"
+          className="p-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+        >
           Update
         </button>
       </form>
 
       {/* Account Actions */}
       <div className="text-red-500 flex justify-between mt-5">
-        <span className="cursor-pointer hover:underline">Delete Account</span>
-        <span className="cursor-pointer hover:underline">Sign Out</span>
+        <span
+          className="cursor-pointer hover:underline"
+          onClick={() => setShowModal(true)}
+        >
+          Delete Account
+        </span>
+        <span
+          className="cursor-pointer hover:underline"
+          onClick={handleSignout}
+        >
+          Sign Out
+        </span>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {ShowModal && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-md shadow-lg">
+            <h3 className="text-center mb-4">Are you sure you want to delete your account?</h3>
+            <div className="flex justify-between">
+              <button
+                className="bg-red-500 text-white p-2 rounded-md"
+                onClick={handleDeleteUser}
+              >
+                Yes, Delete
+              </button>
+              <button
+                className="bg-gray-500 text-white p-2 rounded-md"
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
