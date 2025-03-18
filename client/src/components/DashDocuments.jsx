@@ -2,7 +2,8 @@ import React from 'react'
 
 export default function DashDocuments() {
   return (
-    <div><div className=" flex items-center justify-center">
+    <div>
+      <div className=" flex items-center justify-center">
     <div className="max-w-5xl w-full bg-white  rounded-lg p-6">
       
       <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Documents</h1>
