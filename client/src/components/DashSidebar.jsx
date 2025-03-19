@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 export default function Dashsidebar() {
   const location = useLocation();
   const [tab, setTab] = useState("");
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -16,6 +18,14 @@ export default function Dashsidebar() {
   return (
     <div className="w-full md:w-56 bg-gray-100 h-full p-4 shadow-lg">
       <div className="flex flex-col space-y-2">
+      {currentUser.isAdmin ? (
+        <span className="p-3 rounded-lg font-bold  "> 
+          Admin</span>
+      ):(
+        <span className="p-3 rounded-lg font-bold  "> 
+          User</span>
+      )}
+        
         <Link to="/dashboard?tab=profile">
           <div
             className={`p-3 rounded-lg cursor-pointer hover:bg-blue-500 hover:text-white ${
@@ -23,6 +33,7 @@ export default function Dashsidebar() {
             }`}
           >
             Profile
+            
           </div>
         </Link>
         <Link to="/dashboard?tab=mybooking">
@@ -31,7 +42,7 @@ export default function Dashsidebar() {
               tab === "mybooking" ? "bg-blue-500 text-white" : "bg-white text-black"
             }`}
           >
-            My booking
+            My Booking
           </div>
         </Link>
         <Link to="/dashboard?tab=documents">

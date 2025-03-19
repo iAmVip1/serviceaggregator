@@ -11,6 +11,7 @@ import Header from './components/Header'
 import Admin from './pages/Admin'
 import Footer from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
+import ApplicaionForm from './pages/ApplicaionForm'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
     
     <Route path='/dashboard' element={<Dashboard />} />
     <Route path='/mybooking' element={<MyBooking />} />
+    <Route path='/upload-documents' element={<ApplicaionForm />} />
     </Route>
     
     <Route path='/select' element={<Select />} />

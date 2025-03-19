@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const applicationSchema = new mongoose.Schema(
 {
     
+    username: {
+        type: String,
+        required: true,
+    },
     city: {
         type: String,
         required: true,
