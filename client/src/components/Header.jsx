@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
 import { signoutSuccess } from '../redux/user/userSlice';
 
+
 export default function Header() {
   const dispatch= useDispatch()
   const {currentUser} = useSelector(state => state.user);
@@ -100,7 +101,7 @@ className='sm:hidden md:block' type="button">
       
     </ul>
     <div className="py-2">
-      <div className="block px-4 py-2 text-sm text-white hover:bg-gray-600 "
+      <div className="block px-4 py-2 text-sm text-white hover:bg-gray-600 hover:cursor-pointer "
       onClick={handleSignout}>Sign out</div>
     </div>
 </div>
@@ -109,8 +110,8 @@ className='sm:hidden md:block' type="button">
           {/* dropdown */}
         </li>
         <li>
-        <NavLink to='/profile' className={({ isActive }) => isActive ?"block py-2 px-3 text-black bg-gray-400 rounded-sm md:hidden" :
-          "block py-2 px-3 text-black rounded-sm hover:bg-gray-700 hover:text-white md:hidden "} >Profile</NavLink>
+        <NavLink to='/dashboard?tab=profile' className={({ isActive }) => isActive ?"block py-2 px-3 text-black bg-gray-400 rounded-sm md:hidden" :
+          "block py-2 px-3 text-black rounded-sm hover:bg-gray-700 hover:text-white md:hidden "} >Dashboard</NavLink>
         </li>
         </>
         ):(
