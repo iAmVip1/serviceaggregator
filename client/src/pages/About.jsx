@@ -1,4 +1,5 @@
 import React from 'react'
+import aboutLogo from '../../../images/logo1.png'
 
 export default function About() {
   return (
@@ -6,7 +7,7 @@ export default function About() {
       <div className="max-w-lg  overflow-hidden">
         {/* Image Section */}
         <img
-          src="https://github.com/iAmVip1/serviceaggregator/blob/main/images/logo1.png?raw=true" 
+          src={aboutLogo}
           alt="logo"
           className="w-full p-1 h-64 object-contain"
         />

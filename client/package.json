@@ -20,6 +20,8 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.3.0",
+    "react-slick": "^0.30.3",
+    "react-typed": "^2.0.12",
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import React from 'react'
+import contactImg from '../../../imagesForWeb/contactus.jpg'
 
 export default function Contact() {
   return (
@@ -59,8 +60,8 @@ export default function Contact() {
         <div className="lg:w-1/2 w-full flex flex-col items-center">
           <h3 className="text-lg font-medium mb-4">Don't hesitate to contact</h3>
           <img
-            src="https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/contactus.jpg?raw=true"
-            alt="Contact Us Illustration"
+            src={contactImg}
+            alt="Contact Us "
             className="w-full h-auto max-h-64 object-cover"
           />
         </div>

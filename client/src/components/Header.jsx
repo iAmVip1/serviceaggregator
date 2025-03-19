@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
 import { signoutSuccess } from '../redux/user/userSlice';
+import Logo from '../../../images/logo2.png'
 
 
 export default function Header() {
@@ -36,7 +37,7 @@ export default function Header() {
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <Link to='/' className='font-bold text-sm sm:text-xl flex flex-wrap'>
         
-        <img src="https://github.com/iAmVip1/serviceaggregator/blob/main/images/logo2.png?raw=true" alt="logo"
+        <img src={Logo} alt="logo"
         className="h-18" />
         <span className='text-amber-500 px-2 mt-7 sm:mt-5'>Service </span>
         <span className="mt-7 sm:mt-5"> Aggregator</span>

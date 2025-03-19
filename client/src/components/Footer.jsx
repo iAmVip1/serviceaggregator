@@ -1,3 +1,5 @@
+import footerLogo from '../../../images/logo1dark.png'
+
 const Footer = () => {
     return (
       <footer className="bg-black text-white py-8 px-4">
@@ -6,7 +8,7 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <div className="flex flex-col items-center md:items-start">
               <img
-              className="h-50 ml-2" src="https://github.com/iAmVip1/serviceaggregator/blob/main/images/logo1dark.png?raw=true" alt="" />
+              className="h-50 ml-2" src={footerLogo} alt="" />
             </div>
           </div>
   

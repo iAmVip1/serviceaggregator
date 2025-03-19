@@ -1,96 +1,38 @@
-import React from 'react'
+import React from 'react';
+import { ReactTyped } from "react-typed";
+import Image3 from '../assets/background/back5.jpg'
 
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className='min-h-screen'>
-       <div className=" flex items-center h-150 justify-center shadow-lg"
-       style={{
-        backgroundImage: "url('https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/hero_1.jpg?raw=true')",
-      }}
-       >
-      <div
-        className="relative w-full max-w-md h-96 bg-cover bg-center rounded-lg "
-        
-      >
-        <div className="absolute inset-0  bg-opacity-60 flex flex-col justify-center items-center text-center px-6 rounded-lg">
-          <h2 className="text-2xl md:text-3xl font-bold text-white uppercase">
-          Service Aggregator
-          </h2>
-          <p className="mt-4 text-sm md:text-base text-gray-300">
-          We are here for you for any home services
+    <div className='text-white min-h-screen'>
+      <div className=' w-full h-screen mx-auto text-center flex flex-col justify-center bg-cover bg-center '
+      style={{backgroundImage: `url(${Image3})`}}>
+        <p className='text-[#00df9a] font-bold p-2'>
+         For your home services
+        </p>
+        <h1 className='md:text-7xl sm:text-6xl text-4xl font-bold md:py-6'>
+          <span className='text-amber-500 px-3'>Service</span>
+          <span>Aggregator</span>
+        </h1>
+        <div className='flex justify-center items-center'>
+          <p className='md:text-5xl sm:text-4xl text-xl font-bold py-4'>
+            To find
           </p>
-          <button className="mt-6 px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold uppercase rounded-lg">
-            Call now
-          </button>
+          <ReactTyped
+          className='md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2'
+            strings={['Electrician', 'Plumber', 'Carpenter', 'Maid', 'Water Supplier', 'Laundry Man']}
+            typeSpeed={120}
+            backSpeed={140}
+            loop
+          />
         </div>
+        <p className='md:text-2xl text-xl font-bold text-gray-400'>We are expert in Serivce. Repair. Maintenance.</p>
+        <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black'>Get Started</button>
       </div>
+      <div className="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum reiciendis fugiat facere voluptatem repellendus exercitationem laudantium voluptatum corrupti, eveniet dicta corporis possimus, nisi ipsam eum modi consectetur soluta est ratione!</div>
     </div>
+  );
+};
 
-      {/* services */}
-      <div className=" mt-4 mb-4 flex items-center justify-center bg-gray-100">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Services</h1>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {/* Service 1 */}
-          <div className="p-4 bg-white shadow-md rounded-md flex flex-col items-center justify-center hover:cursor-pointer">
-            <img
-              src="https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/elec.png?raw=true" 
-              alt="Electrician"
-              className="w-16 h-16 mb-4"
-            />
-            <h2 className="text-2xl font-bold text-gray-700">3</h2>
-          </div>
-          {/* Service 2 */}
-          <div className="p-4 bg-white shadow-md rounded-md flex flex-col items-center justify-center hover:cursor-pointer">
-            <img
-              src="https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/serviceman.png?raw=true" 
-              alt="Plumber"
-              className="w-16 h-16 mb-4"
-            />
-            <h2 className="text-2xl font-bold text-gray-700">1</h2>
-          </div>
-          {/* Service 3 */}
-          <div className="p-4 bg-white shadow-md rounded-md flex flex-col items-center justify-center hover:cursor-pointer">
-            <img
-              src="https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/car.png?raw=true"
-              alt="Carpenter"
-              className="w-16 h-16 mb-4"
-            />
-            <h2 className="text-2xl font-bold text-gray-700">1</h2>
-          </div>
-          {/* Service 4 */}
-          <div className="p-4 bg-white shadow-md rounded-md flex flex-col items-center justify-center hover:cursor-pointer">
-            <img
-              src="https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/avatar213.png?raw=true" 
-              alt="Maid"
-              className="w-16 h-16 mb-4"
-            />
-            <h2 className="text-2xl font-bold text-gray-700">0</h2>
-          </div>
-          {/* Service 5 */}
-          <div className="p-4 bg-white shadow-md rounded-md flex flex-col items-center justify-center hover:cursor-pointer">
-            <img
-              src="https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/water.png?raw=true" 
-              alt="Water Supplier"
-              className="w-16 h-16 mb-4"
-            />
-            <h2 className="text-2xl font-bold text-gray-700">0</h2>
-          </div>
-          {/* Service 6 */}
-          <div className="p-4 bg-white shadow-md rounded-md flex flex-col items-center justify-center hover:cursor-pointer">
-            <img
-              src="https://github.com/iAmVip1/serviceaggregator/blob/main/imagesForWeb/wash.png?raw=true" 
-              alt="Laundry Man"
-              className="w-16 h-16 mb-4"
-            />
-            <h2 className="text-2xl font-bold text-gray-700">0</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    </div>
-  )
-}
-
+export default Home;
