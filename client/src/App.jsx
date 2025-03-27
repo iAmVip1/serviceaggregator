@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
 import ApplicaionForm from './pages/ApplicaionForm'
 import Application from './pages/Application'
+import Search from './pages/Search'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
     <Route path='/about' element={<About />} />
     <Route path='/contact' element={<Contact />} />
     <Route path='/application/:applicationId' element={<Application />} />
+    <Route path='/search' element={<Search />} />
 
     <Route element={<PrivateRoute />} >
     

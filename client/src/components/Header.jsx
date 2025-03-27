@@ -73,7 +73,7 @@ export default function Header() {
         
 
 <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-className='sm:hidden md:block' type="button">
+className='sm:hidden md:block cursor-pointer' type="button">
   <img className='rounded-full h-7 w-7 ring-2 ring-gray-300' src={currentUser.profilePicture} alt="" /> 
   
 </button>
