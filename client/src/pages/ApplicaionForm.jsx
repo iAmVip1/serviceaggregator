@@ -129,6 +129,7 @@ export default function ApplicaionForm() {
     
                 if (formData.phoneNumber1.length < 10) return setError('Phone numbers must be 10 numbers')
                 if (formData.phoneNumber2.length < 10) return setError('Phone numbers must be 10 numbers')
+                if (formData.experience > 10) return setError('Experience must be less than 10 years')
      
             setLoading(true);
             setError(false);
@@ -207,6 +208,12 @@ export default function ApplicaionForm() {
             id='phoneNumber2' onChange={handleChange} value={formData.phoneNumber2}
             required />
 
+<input type="number" placeholder='Experience' 
+            className='border-gray-300 p-3 rounded-lg text-black' 
+            id='experience' onChange={handleChange} value={formData.experience}
+            required />
+
+
 <label className=" font-bold text-gray-800 bg-amber-400 rounded-3xl text-center">Work Type</label>
 <div className="flex gap-6 flex-wrap">
                 
@@ -262,11 +269,7 @@ export default function ApplicaionForm() {
 
         <div className="flex flex-col flex-1 gap-4">
                 
-        <input type="number" placeholder='Experience' 
-            className='border-gray-300 p-3 rounded-lg text-black' 
-            id='experience' onChange={handleChange} value={formData.experience}
-            required />
-
+       
             <p className='font-semibold'>Images:
             <span className='font-normal text-gray-500 ml-2'>Please upload your certificates or license
                 </span>    
@@ -306,7 +309,7 @@ export default function ApplicaionForm() {
 }   
 
             <button  disabled={loading || uploading}
-             className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 p-2 rounded-full
+             className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 p-2 rounded-md hover:font-semibold hover:shadow-lg
             cursor-pointer hover:text-white' type='submit' >
           {loading ? 'Submitting...' : 'Submit'}
          </button>
