@@ -6,6 +6,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { TriangleAlert } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function DashProfile() {
@@ -110,6 +111,9 @@ export default function DashProfile() {
       setupdateUserError(error.message);
     }
   };
+  
+  console.log(`URL: /api/user/update/${currentUser._id}`);
+
 
   const handleDeleteUser = async () => {
     setShowModal(false);
@@ -252,20 +256,44 @@ export default function DashProfile() {
         </span>
       </div>
 
+      {updateUserSuccess && (
+                      <div className='p-4 mt-2 mb-4 text-sm text-green-600 rounded-lg bg-green-100 " role="alert'>
+                      <span class="font-medium"> {updateUserSuccess} </span> 
+                    </div>
+      )}
+
+{
+        updateUserError && (
+          <div className='p-4 mt-2 mb-4 text-sm text-red-600 rounded-lg bg-red-100 " role="alert'>
+          <span class="font-medium">Error!</span> {updateUserError}
+        </div>
+        )
+      }
+
+{
+        error && (
+          <div className='p-4 mt-2 mb-4 text-sm text-red-600 rounded-lg bg-red-100 " role="alert'>
+          <span class="font-medium">Error!</span> {error}
+        </div>
+        )
+      }
+
       {/* Delete Confirmation Modal */}
       {ShowModal && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-gray-500  flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-lg">
+            <TriangleAlert className='h-14 w-14 text-gray-400 
+             mb-4 mx-auto' />
             <h3 className="text-center mb-4">Are you sure you want to delete your account?</h3>
             <div className="flex justify-between">
               <button
-                className="bg-red-500 text-white p-2 rounded-md"
+                className="bg-red-500 text-white p-2 rounded-md cursor-pointer hover:bg-red-600"
                 onClick={handleDeleteUser}
               >
                 Yes, Delete
               </button>
               <button
-                className="bg-gray-500 text-white p-2 rounded-md"
+                className="bg-gray-500 text-white p-2 rounded-md cursor-pointer hover:bg-gray-600"
                 onClick={() => setShowModal(false)}
               >
                 Cancel
