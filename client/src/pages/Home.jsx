@@ -27,8 +27,9 @@ const Home = () => {
             loop
           />
         </div>
-        <p className='md:text-2xl text-xl font-bold text-gray-400'>We are expert in Serivce. Repair. Maintenance.</p>
-        <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black'>Get Started</button>
+        <p className='md:text-2xl text-xl font-bold text-gray-400'>We are expert in Serivce, Repair, Maintenance.</p>
+        <button className='bg-emerald-500 hover:bg-emerald-400
+         w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black cursor-pointer'>Call now</button>
       </div>
       <div className="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum reiciendis fugiat facere voluptatem repellendus exercitationem laudantium voluptatum corrupti, eveniet dicta corporis possimus, nisi ipsam eum modi consectetur soluta est ratione!</div>
     </div>

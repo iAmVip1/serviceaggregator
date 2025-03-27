@@ -112,7 +112,6 @@ export default function DashProfile() {
     }
   };
   
-  console.log(`URL: /api/user/update/${currentUser._id}`);
 
 
   const handleDeleteUser = async () => {
