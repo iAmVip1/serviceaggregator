@@ -76,7 +76,7 @@ export const getApplication = async (req, res, next) => {
 
           if (searchTerm) {
             query.$or = [
-              { name: { $regex: searchTerm, $options: 'i' } },
+              { username: { $regex: searchTerm, $options: 'i' } },
               { address: { $regex: searchTerm, $options: 'i' } },
             ];
           }
