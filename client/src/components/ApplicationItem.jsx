@@ -14,8 +14,8 @@ export default function ApplicationItem( {application} ) {
     transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]
     ">
       <Link to={`/application/${application._id}`}>
-      <img src={application.userImage} alt="Cover photo"
-        className="h-[320px] sm:h-[220px] w-full object-contain
+      <img src={application.userImage} alt="User image"
+        className="h-[320px] sm:h-[220px] w-full object-cover
         hover:scale-105 transition-scale duration-300 dark:text-black"
         />
         <div className=" p-3 flex flex-col gap-2 w-full dark:text-black">

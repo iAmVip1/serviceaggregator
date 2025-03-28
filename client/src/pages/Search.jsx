@@ -16,6 +16,7 @@ export default function Search() {
 
     const [loading, setLoading] = useState(false);
     const [applications, setApplications] = useState([]);
+    const [showMore, setShowMore] = useState(false);
 
     console.log(applications);
 
@@ -39,9 +40,15 @@ export default function Search() {
         }
         const fetchApplications = async () => {
             setLoading(true);
+            setShowMore(false);
             const searchQuery = urlParams.toString();
             const res = await fetch(`/api/application/get?${searchQuery}`);
             const data = await res.json();
+            if (data.length > 8) {
+                setShowMore(true);
+            }else{
+                setShowMore(false)
+            }
             setApplications(data);
             setLoading(false);
 
@@ -86,6 +93,20 @@ export default function Search() {
         navigate(`/search?${searchQuery}`);
     }
 
+    const onShowMoreClick = async () => {
+        const numberOfApplications = applications.length;
+        const startIndex = numberOfApplications;
+        const urlParams = new URLSearchParams(location.search);
+        urlParams.set('startIndex', startIndex);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/application/get?${searchQuery}`);
+        const data = await res.json();
+        if (data.length < 9) {
+          setShowMore(false);
+        }
+        setApplications([...applications, ...data]); 
+      }
+
   return (
     <div className='flex flex-col md:flex-row min-h-screen'>
         <div className="p-7 border-b-1 md:border-r-1 md:min-h-screen border-b-gray-300
@@ -94,10 +115,10 @@ export default function Search() {
             onSubmit={handleSubmit}>
                 <div className="flex items-center gap-2">
                     <label className='whitespace-nowrap font-semibold' >
-                        Searched For:
+                        Search for:
                     </label>
 
-                    <input type="text" id='searchTerm' placeholder='Search...' 
+                    <input type="text" id='searchTerm' placeholder='Address or Username' 
                     className='border rounded-lg p-3 w-full text-black'
                     value={sidebardata.searchTerm}
                     onChange={handleChange} />
@@ -240,6 +261,13 @@ export default function Search() {
           applications &&
           applications.map((application) =>
             <ApplicationItem key={application._id} application ={application} />
+        )}
+        {showMore && (
+            <button onClick={onShowMoreClick}
+            className='text-green-700 hover:underline p-7 text-center w-full  cursor-pointer'
+            >
+                Show More
+            </button>
         )}
             </div>
 
