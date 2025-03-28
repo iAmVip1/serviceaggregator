@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ApplicationItem from '../components/ApplicationItem';
 
 
 export default function Search() {
     const navigate = useNavigate();
     const [sidebardata, setSidebardata] = useState({
         searchTerm: '',
-        worktype: 'all',
+        workType: 'all',
         sort: 'created_at',
         order: 'desc',
     })
@@ -21,17 +22,17 @@ export default function Search() {
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
         const searchTermFromUrl = urlParams.get('searchTerm');
-        const worktypeFromUrl = urlParams.get('worktype');
+        const workTypeFromUrl = urlParams.get('workType');
         const sortFromUrl = urlParams.get('sort');
         const orderFromUrl = urlParams.get('order');
 
         if ( searchTermFromUrl ||
-            worktypeFromUrl ||
+            workTypeFromUrl ||
             sortFromUrl ||
             orderFromUrl ) {
                 setSidebardata({
                     searchTerm: searchTermFromUrl || '',
-                    worktype: worktypeFromUrl || 'all',
+                    workType: workTypeFromUrl || 'all',
                     sort: sortFromUrl || 'created_at',
                 order: orderFromUrl || 'desc',
                 })
@@ -57,7 +58,7 @@ export default function Search() {
             e.target.id === 'maid' || e.target.id === 'laundryMan' ||
             e.target.id === 'waterSupply' 
           ) {
-            setSidebardata({ ...sidebardata, type: e.target.id });
+            setSidebardata({ ...sidebardata, workType: e.target.id });
           }
 
           if (e.target.id === 'searchTerm') {
@@ -78,7 +79,7 @@ export default function Search() {
         e.preventDefault();
         const urlParams = new URLSearchParams();
         urlParams.set('searchTerm', sidebardata.searchTerm);
-        urlParams.set('worktype', sidebardata.worktype);
+        urlParams.set('workType', sidebardata.workType);
         urlParams.set('sort', sidebardata.sort);
         urlParams.set('order', sidebardata.order);
         const searchQuery = urlParams.toString();
@@ -87,7 +88,7 @@ export default function Search() {
 
   return (
     <div className='flex flex-col md:flex-row min-h-screen'>
-        <div className="p-7 border-b-1 md:border-r-1 md:min-h-screen
+        <div className="p-7 border-b-1 md:border-r-1 md:min-h-screen border-b-gray-300
          ">
             <form className='flex flex-col gap-8'
             onSubmit={handleSubmit}>
@@ -119,7 +120,7 @@ export default function Search() {
                         <input type="checkbox" id='all' 
                         className='w-5'
                         onChange={handleChange}
-                        checked={sidebardata.worktype === 'all'}
+                        checked={sidebardata.workType === 'all'}
                         />
                         <span >All</span>
                     </div>
@@ -127,7 +128,7 @@ export default function Search() {
                         <input type="checkbox" id='plumber' 
                         className='w-5'
                         onChange={handleChange}
-                        checked={sidebardata.worktype === 'plumber'} />
+                        checked={sidebardata.workType === 'plumber'} />
                         <span >Plumber</span>
                     </div>
  
@@ -143,7 +144,7 @@ export default function Search() {
                         <input type="checkbox" id='carpenter' 
                         className='w-5'
                         onChange={handleChange}
-                        checked={sidebardata.worktype === 'carpenter'}
+                        checked={sidebardata.workType === 'carpenter'}
                          />
                         <span >Carpenter </span>
                     </div>
@@ -153,7 +154,7 @@ export default function Search() {
                         <input type="checkbox" id='electrician' 
                         className='w-5'
                         onChange={handleChange}
-                        checked={sidebardata.worktype === 'electrtician'}
+                        checked={sidebardata.workType === 'electrician'}
                         />
                         <span >Electrician</span>
                     </div>
@@ -161,7 +162,7 @@ export default function Search() {
                         <input type="checkbox" id='maid' 
                          className='w-5'
                          onChange={handleChange}
-                        checked={sidebardata.worktype === 'maid'}
+                        checked={sidebardata.workType === 'maid'}
                          />
                          <span >Maid</span>
                      </div>
@@ -175,7 +176,7 @@ export default function Search() {
                  <input type="checkbox" id='laundryMan' 
                      className='w-5'
                      onChange={handleChange}
-                        checked={sidebardata.worktype === 'laundryMan'}
+                        checked={sidebardata.workType === 'laundryMan'}
                      />
                      <span >Laundry Man</span>
 
@@ -186,7 +187,7 @@ export default function Search() {
                      <input type="checkbox" id='waterSupply' 
                     className='w-5'
                     onChange={handleChange}
-                        checked={sidebardata.worktype === 'waterSupply'}
+                        checked={sidebardata.workType === 'waterSupply'}
                     />
              <span >Water Supply</span>
                     </div>
@@ -222,18 +223,28 @@ export default function Search() {
 
         <div className="flex-1">
 
-            <h1 className='text-3xl font-semibold border-b border-gray-700 p-3 mt-5'>
+            <h1 className='text-3xl font-semibold border-b border-b-gray-300 p-3 mt-5'>
                Available Users:
             </h1>
  
+            <div className="p-7 flex flex-wrap gap-4">
+            {! loading && applications.length === 0 && (
+                    <p className='text-xl ' >No Users found !!</p>
+                )}
+                {loading && (
+            <p className='text-xl text-center w-full'>
+              Loading...
+            </p>
+          )}
+          {!loading &&
+          applications &&
+          applications.map((application) =>
+            <ApplicationItem key={application._id} application ={application} />
+        )}
+            </div>
 
         </div>
  
-
     </div>
- 
-
-  )
- 
-
+   )
 }

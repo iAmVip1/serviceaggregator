@@ -67,6 +67,12 @@ export const getApplication = async (req, res, next) => {
           const limit = parseInt(req.query.limit) || 9;
           const startIndex = parseInt(req.query.startIndex) || 0;
 
+          let workType = req.query.workType;
+
+          if (workType === undefined || workType === 'all') {
+            workType = { $in: ['plumber', 'electrician', 'maid', 'carpenter', 'laundryMan', 'waterSupply'] };
+          }
+
           const searchTerm = req.query.searchTerm || '';
 
     const sort = req.query.sort || 'createdAt';
@@ -80,6 +86,8 @@ export const getApplication = async (req, res, next) => {
               { address: { $regex: searchTerm, $options: 'i' } },
             ];
           }
+
+          if (workType !== undefined) query.workType = workType;
       
       const Applications = await Application.find(query)
         .sort({ [sort]: order })

@@ -40,13 +40,13 @@ export default function Application() {
       <div className=" flex items-center justify-center">
     <div className="max-w-5xl w-full   rounded-lg p-6">
       
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Documents</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">User Details</h1>
       
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
        
         <div className="md:col-span-2">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">User Details</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">User Information</h2>
           {/* small */}
           <div className="flex flex-col md:items-center md:hidden">
           <img
