@@ -1,7 +1,16 @@
 import React from 'react'
 import contactImg from '../../../imagesForWeb/contactus.jpg'
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    
+    emailjs.sendForm('service_7ypwibd', 'template_fbveuhj', e.target, 'f-20bUQYCHKal6pvn')
+
+  }
+
   return (
     <div>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -9,13 +18,13 @@ export default function Contact() {
         {/* Left - Contact Form */}
         <div className="lg:w-1/2 w-full lg:mr-8 mb-6 lg:mb-0">
           <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={sendEmail}>
             {/* Name Field */}
             <div>
               <label className="block text-sm font-semibold text-gray-700" htmlFor="name">
                 Name
               </label>
-              <input
+              <input name='name_of'
                 type="text"
                 id="name"
                 placeholder="Your Name"
@@ -27,7 +36,7 @@ export default function Contact() {
               <label className="block text-sm font-semibold text-gray-700" htmlFor="email">
                 Email
               </label>
-              <input
+              <input name='email_from'
                 type="email"
                 id="email"
                 placeholder="Your Email"
@@ -40,7 +49,7 @@ export default function Contact() {
               <label className="block text-sm font-semibold text-gray-700" htmlFor="message">
                 How we can help...
               </label>
-              <textarea
+              <textarea name='message'
                 id="message"
                 placeholder="Your Message"
                 rows="4"
