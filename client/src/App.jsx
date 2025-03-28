@@ -14,10 +14,12 @@ import PrivateRoute from './components/PrivateRoute'
 import ApplicaionForm from './pages/ApplicaionForm'
 import Application from './pages/Application'
 import Search from './pages/Search'
+import ScrollToTop from './components/ScrollToTop'
 
 export default function App() {
   return (
    <BrowserRouter>
+   <ScrollToTop />
    <Header />
    <Routes>
     <Route path='/' element={<Home />} />

@@ -9,7 +9,7 @@ export default function Application() {
   const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [contact, setContact] = useState(false);
+  
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
