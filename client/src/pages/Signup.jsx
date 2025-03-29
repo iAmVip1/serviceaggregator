@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import OAuth from '../components/OAuth';
+import Logo from '../../../images/logo1.png'
 
 export default function Signup() {
   const [formData, setFormData] = useState({});
@@ -90,7 +91,7 @@ export default function Signup() {
         </div>
         
         <div className="w-1/2 flex items-center justify-center">
-          <img src="https://github.com/iAmVip1/serviceaggregator/blob/main/images/logo1.png?raw=true" alt="Illustration" className="w-80" />
+          <img src={Logo} alt="Illustration" className="w-80" />
         </div>
         
       </div>

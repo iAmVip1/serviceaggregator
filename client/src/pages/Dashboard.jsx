@@ -4,6 +4,7 @@ import DashSidebar from "../components/DashSidebar";
 import DashProfile from "../components/DashProfile";
 import DashBooking from "../components/DashBooking";
 import DashDocuments from "../components/DashDocuments";
+import DashUsers from "../components/DashUsers";
 
 
 export default function Dashboard() {
@@ -26,9 +27,14 @@ export default function Dashboard() {
 
     {/* Main Content */}
     <div className="flex-1 p-6">
+      {/* profile */}
       {tab === "profile" && <DashProfile />}
+
       {tab === "mybooking" && <DashBooking />}
+
       {tab === "documents" && <DashDocuments />}
+      
+      {tab === "users" && <DashUsers />}
     </div>
 
   </div>

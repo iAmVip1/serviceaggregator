@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../components/OAuth';
+import Logo from '../../../images/logo1.png'
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
@@ -45,7 +46,7 @@ export default function Signin() {
       <div className="md:bg-slate-200 p-8 rounded-lg shadow-lg flex w-2/3 max-w-4xl sm:w-fit sm:ml-5 sm:mr-5 sm:bg-transparent">
         {/* Left Side - 3D Illustration */}
         <div className="w-1/2 flex items-center justify-center">
-          <img src="https://github.com/iAmVip1/serviceaggregator/blob/main/images/logo1.png?raw=true" alt="Illustration" className="w-80" />
+          <img src={Logo} alt="Illustration" className="w-80" />
         </div>
         {/* Right Side - Form */}
         <div className="w-1/2 p-6">
