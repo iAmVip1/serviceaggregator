@@ -5,6 +5,8 @@ import DashProfile from "../components/DashProfile";
 import DashBooking from "../components/DashBooking";
 import DashDocuments from "../components/DashDocuments";
 import DashUsers from "../components/DashUsers";
+import DashUserDocs from "../components/DashUserDocs";
+import AllBookings from "../components/AllBookings";
 
 
 export default function Dashboard() {
@@ -33,8 +35,12 @@ export default function Dashboard() {
       {tab === "mybooking" && <DashBooking />}
 
       {tab === "documents" && <DashDocuments />}
-      
+
       {tab === "users" && <DashUsers />}
+
+      {tab === "userdoc" && <DashUserDocs />}
+
+      {tab === "allbooks" && <AllBookings />}
     </div>
 
   </div>

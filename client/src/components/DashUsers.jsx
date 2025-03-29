@@ -141,7 +141,7 @@ export default function DashUsers() {
                   <div className="bg-white p-6 rounded-md shadow-lg">
                     <TriangleAlert className='h-14 w-14 text-gray-400 
                      mb-4 mx-auto' />
-                    <h3 className="text-center mb-4">Are you sure you want to delete your account?</h3>
+                    <h3 className="text-center mb-4">Are you sure you want to delete this account?</h3>
                     <div className="flex justify-between">
                       <button
                         className="bg-red-500 text-white p-2 rounded-md cursor-pointer hover:bg-red-600"

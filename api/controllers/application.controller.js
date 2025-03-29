@@ -117,3 +117,56 @@ export const getApplication = async (req, res, next) => {
           next(error);
       }
   }
+  
+    export const getAdminApplications = async (req, res, next) => {
+      try {
+          
+
+          let workType = req.query.workType;
+
+          if (workType === undefined || workType === 'all') {
+            workType = { $in: ['plumber', 'electrician', 'maid', 'carpenter', 'laundryMan', 'waterSupply'] };
+          }
+
+          const searchTerm = req.query.searchTerm || '';
+
+    const sort = req.query.sort || 'createdAt';
+
+    const order = req.query.order || 'desc';
+    const query = {};
+
+          if (searchTerm) {
+            query.$or = [
+              { username: { $regex: searchTerm, $options: 'i' } },
+              { address: { $regex: searchTerm, $options: 'i' } },
+            ];
+          }
+
+          if (workType !== undefined) query.workType = workType;
+      
+      const Applications = await Application.find(query)
+        .sort({ [sort]: order })
+        
+        const totalApplications = await Application.countDocuments();
+  
+      const now = new Date();
+  
+      const oneMonthAgo = new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        now.getDate()
+      );
+  
+      const lastMonthApplications = await Application.countDocuments({
+        createdAt: { $gte: oneMonthAgo },
+      });
+  
+      
+  
+        return res.status(200).json(Applications, totalApplications,
+          lastMonthApplications,);
+  
+      } catch (error) {
+          next(error);
+      }
+  }

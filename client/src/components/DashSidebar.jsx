@@ -58,6 +58,10 @@ export default function Dashsidebar() {
             
           </div>
         </Link>
+
+        {!currentUser.isAdmin && (
+          <>
+          
         <Link to="/dashboard?tab=mybooking">
           <div
             className={`p-3 rounded-lg cursor-pointer hover:bg-blue-500 hover:text-white ${
@@ -76,6 +80,8 @@ export default function Dashsidebar() {
             Documents
           </div>
         </Link>
+          </>
+         )}
         {currentUser.isAdmin && (
           <Link to='/dashboard?tab=users'>
           <div
@@ -84,6 +90,29 @@ export default function Dashsidebar() {
             }`}
           >
             Users
+          </div>
+           </Link>
+        )}
+        {currentUser.isAdmin && (
+          <Link to='/dashboard?tab=userdoc'>
+          <div
+            className={`p-3 rounded-lg cursor-pointer hover:bg-blue-500 hover:text-white ${
+              tab === "userdoc" ? "bg-blue-500 text-white" : "bg-white text-black"
+            }`}
+          >
+            User Documents
+          </div>
+           </Link>
+        )}
+
+        {currentUser.isAdmin && (
+          <Link to='/dashboard?tab=allbooks'>
+          <div
+            className={`p-3 rounded-lg cursor-pointer hover:bg-blue-500 hover:text-white ${
+              tab === "allbooks" ? "bg-blue-500 text-white" : "bg-white text-black"
+            }`}
+          >
+            All Bookings
           </div>
            </Link>
         )}
