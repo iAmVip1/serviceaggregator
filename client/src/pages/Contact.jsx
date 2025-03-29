@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import contactImg from '../../../imagesForWeb/contactus.jpg'
 import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+
+  const [openPopup, setOpenPopup] = useState(false)
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ export default function Contact() {
                 id="name"
                 placeholder="Your Name"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               />
             </div>
             {/* Email Field */}
@@ -41,6 +44,7 @@ export default function Contact() {
                 id="email"
                 placeholder="Your Email"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               />
             </div>
           
@@ -54,15 +58,28 @@ export default function Contact() {
                 placeholder="Your Message"
                 rows="4"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               ></textarea>
             </div>
             {/* Submit Button */}
             <button
               type="submit"
               className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md focus:outline-none"
+              onClick={() => setOpenPopup(true)}
+
             >
               Submit
             </button>
+            {
+              openPopup && 
+              <div className="rounded-md p-4 bg-white popup">
+                <div className="flex flex-row justify-between">
+                  <h2>Bravo!! </h2>
+                  <button onClick={()=> setOpenPopup(false)}>X</button>
+                </div>
+                <p className='text-xl'> Your message has been sent</p>
+              </div>
+	}
           </form>
         </div>
         {/* Right - Image Section */}
