@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import BookNow from '../components/BookNow';
 
 
 
@@ -9,9 +10,14 @@ export default function Application() {
   const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [booking, setBooking] = useState(false);
   
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
+ 
+  
+ 
+  
 
   useEffect(() => {
     const fetchApplication = async () => {
@@ -83,11 +89,14 @@ export default function Application() {
 
         {/* User Image */}
         <div className="flex flex-col sm:hidden items-center md:block ">
+          <a href={application && application.userImage} target='_blank'>
+
           <img
             src={application && application.userImage} 
             alt="User Profile"
             className="w-40 h-40 rounded-full object-cover shadow-md mb-4"
           />
+          </a>
           <p className="text-sm text-gray-500 font-bold ml-10">User Image</p>
         </div>
       </div>
@@ -96,11 +105,16 @@ export default function Application() {
       <div className="mt-8">
         <h2 className="text-xl font-semibold text-gray-700 mb-4">User Documents</h2>
         <div className="flex flex-col items-center">
+
+          <a href={application && application.imageUrls} target="_blank"
+          className="w-80 md:w-1/2 shadow-md">
+
           <img
             src={application && application.imageUrls}
             alt="Driving License"
-            className="w-80 md:w-1/2 shadow-md"
+            
           />
+          </a>
           
         </div>
       </div>
@@ -108,12 +122,14 @@ export default function Application() {
     {/* Booking Button */}
     <div className="mt-6 text-center">
       {
-              currentUser && application && application.userRef !== currentUser._id && (
+              currentUser && application && application.userRef !== currentUser._id && !booking &&  (
                 <button className="px-6 py-2 bg-emerald-600 text-white font-semibold rounded-md hover:bg-emerald-700
-                cursor-pointer">
+                cursor-pointer"
+                onClick={() => setBooking(true)}>
           Book Now
         </button>
               )}
+              {booking && <BookNow application={application} />}
               </div>
       
 
