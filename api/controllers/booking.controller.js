@@ -52,8 +52,7 @@ export const getBooking = async (req, res, next) => {
 
     export const getBookings = async (req, res, next) => {
       try {
-          const limit = parseInt(req.query.limit) || 9;
-          const startIndex = parseInt(req.query.startIndex) || 0;
+          
 
           const searchTerm = req.query.searchTerm || '';
 
@@ -71,8 +70,7 @@ export const getBooking = async (req, res, next) => {
       
       const Bookings = await Booking.find(query)
         .sort({ [sort]: order })
-        .limit(limit)
-        .skip(startIndex);
+        
   
         const totalBookings = await Booking.countDocuments();
   

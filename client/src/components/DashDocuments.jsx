@@ -66,6 +66,11 @@ const handleApplicationDelete = async (applicationId) => {
             className='w-20 h-10 object-cover bg-gray-500'
             />
           </Link>
+          <Link to={`/update-documents/${application._id}`}>
+            <button className='text-green-500 hover:underline'>
+              Edit
+            </button>
+            </Link>
           </>
         ))}
         </div>
