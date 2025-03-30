@@ -82,9 +82,11 @@ export default function Admin() {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition"
+            className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition disabled:opacity-80" disabled={loading}
           >
-            Log in
+            {
+              loading ? 'Loading...' : 'Login'
+            }
           </button>
         </form>
         {

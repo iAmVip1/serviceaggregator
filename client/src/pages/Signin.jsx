@@ -63,7 +63,7 @@ export default function Signin() {
               <input type="password" className="w-full px-4 py-2 border rounded-md " placeholder="Enter your password" id="password"
               onChange={handleChange} />
             </div>
-            <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+            <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition disabled:opacity-80"
             disabled={loading}>{
               loading ? 'Loading...' : 'Login'
             }</button>
