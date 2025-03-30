@@ -82,7 +82,7 @@ export default function MyBooking() {
               {/* Row 1 */}
               <tr>
                 <td className="border border-gray-300 px-4 py-2 text-center">
-                {booking.userName}
+                {booking.bookingUserName}
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
                 {booking.bookingPhoneNumber}

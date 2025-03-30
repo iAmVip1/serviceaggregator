@@ -218,7 +218,7 @@ export default function DashProfile() {
           placeholder="Email"
           value={formData.email || currentUser.email}
           onChange={handleChange}
-          className="p-2 border rounded-md w-full" disabled
+          className="p-2 border rounded-md w-full disabled:opacity-80 cursor-not-allowed" disabled
         />
 
         {/* Password */}
