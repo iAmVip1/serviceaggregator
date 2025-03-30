@@ -41,6 +41,7 @@ export default function BookNow({application}) {
   const handleSubmit = async (e) => {
     e.preventDefault ();
     try {
+      if (formData.bookingPhoneNumber.length < 10) return setError('Phone numbers must be 10 numbers')
       setLoading(true);
       setError(false);
       const res = await fetch ('/api/booking/create',{
@@ -52,6 +53,7 @@ export default function BookNow({application}) {
               ...formData,
               bookingUserRef: currentUser._id,
               bookingUserMail: currentUser.email ,
+              bookingUserName: currentUser.username ,
               workType: application.workType,
               phoneNumber1: application.phoneNumber1,
               phoneNumber2: application.phoneNumber2,
