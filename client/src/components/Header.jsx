@@ -81,7 +81,7 @@ export default function Header() {
     <li className='sm:block md:hidden hover:text-blue-500'>
             <NavLink to='/' className={({ isActive }) => isActive ? "text-blue-500" : 
             "font-medium"}>
-            <BookCheck  />
+            <House  />
             </NavLink>
           </li>
           <li className='sm:block md:hidden hover:text-blue-500'>
@@ -113,7 +113,7 @@ export default function Header() {
     <li className='sm:block md:hidden hover:text-blue-500'>
             <NavLink to='/booking' className={({ isActive }) => isActive ? "text-blue-500" : 
             "font-medium"}>
-            <House />
+            <BookCheck />
             </NavLink>
           </li>
              <button className='group relative border-none block text-gray-500 text-lg px-3 py-1 rounded sm:hidden md:block'>
