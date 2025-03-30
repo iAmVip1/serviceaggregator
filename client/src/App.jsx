@@ -32,7 +32,7 @@ export default function App() {
     <Route element={<PrivateRoute />} >
     
     <Route path='/dashboard' element={<Dashboard />} />
-    <Route path='/mybooking' element={<MyBooking />} />
+    <Route path='/booking' element={<MyBooking />} />
     <Route path='/upload-documents' element={<ApplicaionForm />} />
     <Route path='/update-documents/:applicationId' element={<UpdateApplication />} />
     </Route>

@@ -70,7 +70,7 @@ export default function BookNow({application}) {
         if (data.success === false){
           setError(data.message);
       }
-      navigate (`/mybooking`)
+      navigate (`/booking`)
     } catch (error) {
       setError(error.message)
       setLoading(false);
