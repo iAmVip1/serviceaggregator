@@ -13,14 +13,14 @@ export default function BookNow({application}) {
     bookingPhoneNumber:'',
     bookingDate:'',
     bookingDays:'',
-    bookingHour:'',
+    bookingHours:'',
   })
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
 
-    if (e.target.id === 'hour' ) {
+    if (e.target.id === 'bookingHours' ) {
       setFormData({
          ...formData,
          [e.target.id]: e.target.value 
@@ -52,12 +52,13 @@ export default function BookNow({application}) {
               ...formData,
               bookingUserRef: currentUser._id,
               bookingUserMail: currentUser.email ,
-              workType: application?.workType,
+              workType: application.workType,
               phoneNumber1: application.phoneNumber1,
               phoneNumber2: application.phoneNumber2,
               city: application.city,
               address: application.address,
               userRef: application.userRef,
+              userName: application.username,
               userMail: application.userMail
 
           }),
@@ -121,9 +122,9 @@ export default function BookNow({application}) {
           <div>
             <label className="block text-gray-700">Hour</label>
             
-            <select name="" id="bookingHour" className="w-full p-2 border rounded-md"
+            <select name="" id="bookingHours" className="w-full p-2 border rounded-md"
              onChange={handleChange}
-             value={formData.hour} 
+             value={formData.bookingHours} 
              required >
               <option value=""> Select Hours </option>
               <option value="11-12"> 11-12 </option>

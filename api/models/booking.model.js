@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const bookingSchema = new mongoose.Schema(
 {
     
+    userName: {
+        type: String,
+        required: true,
+    },
     city: {
         type: String,
         required: true,
@@ -33,6 +37,10 @@ const bookingSchema = new mongoose.Schema(
     },
 
     bookingCity: {
+        type: String,
+        required: true,
+    },
+    bookingHours: {
         type: String,
         required: true,
     },
