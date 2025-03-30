@@ -1,60 +1,55 @@
+import { Pickaxe , MapPin, Mail, Phone, Clock, Wrench, Zap, Tv, Hammer, Ruler } from 'lucide-react';
 import footerLogo from '../../../images/logo1dark.png'
 
-const Footer = () => {
-    return (
-      <footer className="bg-black text-white py-8 px-4">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center md:items-start">
-          {/* Logo and Company Name */}
-          <div className="text-center md:text-left">
-            <div className="flex flex-col items-center md:items-start">
-              <img
+
+export default function Footer() {
+  return (
+    <footer className="bg-black text-white py-10">
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* About Us */}
+        <div>
+        <img
               className="h-50 ml-2" src={footerLogo} alt="" />
-            </div>
-          </div>
-  
-          {/* Location */}
-          <div className="mt-6 md:mt-0 text-center md:text-left">
-            <h3 className="text-orange-400 text-lg font-semibold">Location</h3>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.801847949881!2d85.27875527605308!3d27.69358022538426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1902c99c0b7b%3A0xcfc6f5f02f95748c!2sAmbience%20Infosys%20Pvt.%20Ltd!5e0!3m2!1sen!2snp!4v1647245820601!5m2!1sen!2snp"
-              width="200"
-              height="150"
-              allowFullScreen=""
-              loading="lazy"
-              className="mt-2 border border-gray-500"
-            ></iframe>
-          </div>
-  
-          {/* Services */}
-          <div className="mt-6 md:mt-0 text-center md:text-left">
-            <h3 className="text-orange-400 text-lg font-semibold">OUR SERVICES</h3>
-            <ul className="mt-2 space-y-1">
-              <li>PLUMBING</li>
-              <li>ELECTRICIAN</li>
-              <li>HOME APPLIANCE</li>
-              <li>WELDING</li>
-              <li>CARPENTING</li>
-            </ul>
-          </div>
-  
-          {/* Contact */}
-          <div className="mt-6 md:mt-0 text-center md:text-left">
-            <h3 className="text-orange-400 text-lg font-semibold">CONTACT</h3>
-            <ul className="mt-2 space-y-1">
-              <li>📍 Kalanki, Kathmandu, Nepal</li>
-              <li>📧 info@serviceaggregator.com</li>
-              <li>📞 +977-9843883339</li>
-              <li>Sun-Fri: 9am-6pm</li>
-            </ul>
-          </div>
+
         </div>
-  
-        <div className="border-t border-gray-600 mt-6 pt-4 text-center text-sm">
-          Copyright &copy;2025 All Rights Reserved
+
+        {/* Location */}
+        <div>
+          <h2 className="text-lg font-semibold text-orange-500">Location</h2>
+          <iframe 
+            className="mt-2 w-full h-34 md:w-62"
+            src="https://www.google.com/maps?q=Ambience+Infosys+Pvt.+Ltd&output=embed"
+            allowFullScreen=""
+            loading="lazy"
+          ></iframe>
         </div>
-      </footer>
-    );
-  };
-  
-  export default Footer;
-  
+
+        {/* Our Services */}
+        <div>
+          <h2 className="text-lg font-semibold text-orange-500">OUR SERVICES</h2>
+          <ul className="mt-2 space-y-2 text-sm">
+            <li className="flex items-center gap-2"><Wrench /> PLUMBING</li>
+            <li className="flex items-center gap-2"><Zap /> ELECTRICIAN</li>
+            <li className="flex items-center gap-2"><Tv /> HOME APPLIANCE</li>
+            <li className="flex items-center gap-2"><Hammer /> WELDING</li>
+            <li className="flex items-center gap-2"><Ruler /> CARPENTING</li>
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <h2 className="text-lg font-semibold text-orange-500">CONTACT</h2>
+          <ul className="mt-2 space-y-2 text-sm">
+            <li className="flex items-center gap-2"><MapPin /> Kalanki, Kathmandu, Nepal</li>
+            <li className="flex items-center gap-2"><Mail /> info@serviceaggregator.com</li>
+            <li className="flex items-center gap-2"><Phone /> +977-9843883339</li>
+            <li className="flex items-center gap-2"><Clock /> Sun-Fri: 9am-6pm</li>
+          </ul>
+        </div>
+      </div>
+      <div className="text-center mt-6 border-t border-gray-700 pt-4 text-sm">
+        Copyright &copy;2025 All Rights Reserved
+      </div>
+    </footer>
+  );
+}
