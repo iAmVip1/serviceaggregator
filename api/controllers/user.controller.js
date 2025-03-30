@@ -2,6 +2,7 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 import User from '../models/user.model.js';
 import Application from '../models/application.model.js';
+import Booking from '../models/booking.model.js';
 
 export const test = (req, res) => {
     res.json({message: 'API is working'})
@@ -83,6 +84,34 @@ export const getUserApplications = async (req, res, next) => {
     try {
       const applications = await Application.find({ userRef: req.params.id});
       res.status(200).json(applications);
+    } catch (error) {
+      next (error)
+    }
+  } else {
+    return next (errorHandler(401, 'You can only view your own applications!'));
+  }
+}
+
+
+export const getUserBookings = async (req, res, next) => {
+  if (req.user.id === req.params.id) {
+    try {
+      const bookings = await Booking.find({ userRef: req.params.id});
+      res.status(200).json(bookings);
+    } catch (error) {
+      next (error)
+    }
+  } else {
+    return next (errorHandler(401, 'You can only view your own applications!'));
+  }
+}
+
+
+export const getCustomerBookings = async (req, res, next) => {
+  if (req.user.id === req.params.id) {
+    try {
+      const bookings = await Booking.find({ bookingUserRef: req.params.id});
+      res.status(200).json(bookings);
     } catch (error) {
       next (error)
     }
