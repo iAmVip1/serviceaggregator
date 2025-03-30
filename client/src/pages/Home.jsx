@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactTyped } from "react-typed";
 import Image3 from '../assets/background/back5.jpg'
 import { Link } from "react-router-dom";
-import Maid from '../../../imagesForWeb/avatar213.png'
+import Maid from '../../../imagesForWeb/avatar2133.png'
 import Carpenter from '../../../imagesForWeb/car.png'
 import Electrician from '../../../imagesForWeb/elec.png'
 import Plumber from '../../../imagesForWeb/serviceman.png'

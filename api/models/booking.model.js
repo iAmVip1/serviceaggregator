@@ -53,10 +53,6 @@ const bookingSchema = new mongoose.Schema(
         required: true,
     },
     
-    bookingTime: {
-        type: Number,
-        required: true,
-    },
     bookingDays: {
         type: Number,
         required: true,
