@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
 import { signoutSuccess } from '../redux/user/userSlice';
 import Logo from '../../../images/logo2.png'
-import { House,Building2, LogIn, FileLock, PhoneCall , LogOut } from 'lucide-react';
+import { House,Building2, LogIn, FileLock, PhoneCall , BookCheck  } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Header() {
@@ -81,7 +81,7 @@ export default function Header() {
     <li className='sm:block md:hidden hover:text-blue-500'>
             <NavLink to='/' className={({ isActive }) => isActive ? "text-blue-500" : 
             "font-medium"}>
-            <House />
+            <BookCheck  />
             </NavLink>
           </li>
           <li className='sm:block md:hidden hover:text-blue-500'>
@@ -99,6 +99,23 @@ export default function Header() {
 
           {currentUser ? (
               <>
+               <li className='sm:hidden md:block
+          hover:bg-amber-500 hover:text-white
+           p-2 rounded-xl'>
+            <NavLink to='/booking' className={({ isActive }) => isActive ? "bg-amber-500 text-white p-2 rounded-xl" : 
+         "font-medium"}>
+            My Bookings
+            </NavLink>
+            
+            </li>
+
+    {/* mobile view */}
+    <li className='sm:block md:hidden hover:text-blue-500'>
+            <NavLink to='/booking' className={({ isActive }) => isActive ? "text-blue-500" : 
+            "font-medium"}>
+            <House />
+            </NavLink>
+          </li>
              <button className='group relative border-none block text-gray-500 text-lg px-3 py-1 rounded sm:hidden md:block'>
   <img className='rounded-full h-7 w-7 ring-2 ring-gray-300' src={currentUser.profilePicture} alt="Profile" />
   <div className="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-md scale-y-0 group-hover:scale-y-100 origin-top duration-200 bg-white space-y-2 w-auto">

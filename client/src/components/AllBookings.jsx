@@ -60,7 +60,7 @@ export default function AllBookings() {
        {userBookings && userBookings.length > 0 ? (
       <div className="max-w-5xl w-full bg-white shadow-lg rounded-lg p-6">
         {/* Header */}
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">My Booking</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Total Booking</h1>
         
         {/* Table */}
         <div className="overflow-x-auto">
