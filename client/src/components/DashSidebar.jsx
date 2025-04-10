@@ -68,7 +68,7 @@ export default function Dashsidebar() {
               tab === "mybooking" ? "bg-blue-500 text-white" : "bg-white text-black"
             }`}
           >
-            My Booking
+            Booking Requests
           </div>
         </Link>
         <Link to="/dashboard?tab=documents">

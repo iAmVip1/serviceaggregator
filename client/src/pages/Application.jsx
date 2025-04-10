@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import BookNow from '../components/BookNow';
 
 
@@ -119,18 +119,35 @@ export default function Application() {
         </div>
       </div>
 
-    {/* Booking Button */}
-    <div className="mt-6 text-center">
-      {
-              currentUser && application && application.userRef !== currentUser._id && !booking &&  (
-                <button className="px-6 py-2 bg-emerald-600 text-white font-semibold rounded-md hover:bg-emerald-700
-                cursor-pointer"
-                onClick={() => setBooking(true)}>
-          Book Now
-        </button>
-              )}
-              {booking && <BookNow application={application} />}
-              </div>
+      {currentUser ?
+        (
+          <>
+ {/* Booking Button */}
+ <div className="mt-6 text-center">
+ {
+         currentUser && application && application.userRef !== currentUser._id && !booking &&  (
+           <button className="px-6 py-2 bg-emerald-600 text-white font-semibold rounded-md hover:bg-emerald-700
+           cursor-pointer"
+           onClick={() => setBooking(true)}>
+     Book Now
+   </button>
+         )}
+         {booking && <BookNow application={application} />}
+         </div>
+         </>
+):(
+  <>
+          <div className="text-sm text-teal-500 my-5 flex gap-1">
+          You should be logged in to Book. 
+          <Link className='text-blue-500 hover:underline' to={'/signin'}>
+           Sign-in
+          </Link>
+      </div>
+      </>
+        )
+        }
+
+   
       
 
     </div>

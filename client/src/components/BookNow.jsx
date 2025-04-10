@@ -83,6 +83,7 @@ export default function BookNow({application}) {
   return (
     <div>
       <>
+     
       <div className="flex justify-center items-center p-2 bg-gray-100">
       <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-full">
         <h2 className="text-center text-2xl font-bold mb-6">Booking Form</h2>
@@ -148,6 +149,7 @@ export default function BookNow({application}) {
         </form>
       </div>
     </div>
+        
       </>
     </div>
   )
