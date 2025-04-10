@@ -16,6 +16,7 @@ import Application from './pages/Application'
 import Search from './pages/Search'
 import ScrollToTop from './components/ScrollToTop'
 import UpdateApplication from './pages/UpdateApplication'
+import BookingAll from './pages/BookingAll'
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
     <Route path='/booking' element={<MyBooking />} />
     <Route path='/upload-documents' element={<ApplicaionForm />} />
     <Route path='/update-documents/:applicationId' element={<UpdateApplication />} />
+    <Route path='/bookingall' element={<BookingAll />} />
     </Route>
     
     <Route path='/select' element={<Select />} />

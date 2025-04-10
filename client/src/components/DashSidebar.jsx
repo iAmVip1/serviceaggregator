@@ -100,7 +100,7 @@ export default function Dashsidebar() {
               tab === "userdoc" ? "bg-blue-500 text-white" : "bg-white text-black"
             }`}
           >
-            User Documents
+            Service Providers
           </div>
            </Link>
         )}

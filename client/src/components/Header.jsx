@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
 import { signoutSuccess } from '../redux/user/userSlice';
 import Logo from '../../../images/logo2.png'
-import { House,Building2, LogIn, FileLock, PhoneCall , BookCheck  } from 'lucide-react';
+import { House,Building2, LogIn, FileLock, PhoneCall , BookCheck, BookLock   } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Header() {
@@ -99,6 +99,31 @@ export default function Header() {
 
           {currentUser ? (
               <>
+               {currentUser.isAdmin ?
+        (
+          <>
+
+               <li className='sm:hidden md:block
+          hover:bg-amber-500 hover:text-white
+           p-2 rounded-xl'>
+            <NavLink to='/bookingall' className={({ isActive }) => isActive ? "bg-amber-500 text-white p-2 rounded-xl" : 
+         "font-medium"}>
+            Total Bookings
+            </NavLink>
+            
+            </li>
+
+    {/* mobile view */}
+    <li className='sm:block md:hidden hover:text-blue-500'>
+            <NavLink to='/bookingall' className={({ isActive }) => isActive ? "text-blue-500" : 
+            "font-medium"}>
+            <BookLock />
+            </NavLink>
+          </li>
+       </>   
+):(
+  <>
+
                <li className='sm:hidden md:block
           hover:bg-amber-500 hover:text-white
            p-2 rounded-xl'>
@@ -116,6 +141,9 @@ export default function Header() {
             <BookCheck />
             </NavLink>
           </li>
+  </>
+        )
+        }
              <button className='group relative border-none block text-gray-500 text-lg px-3 py-1 rounded sm:hidden md:block'>
   <img className='rounded-full h-7 w-7 ring-2 ring-gray-300' src={currentUser.profilePicture} alt="Profile" />
   <div className="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-md scale-y-0 group-hover:scale-y-100 origin-top duration-200 bg-white space-y-2 w-auto">
@@ -124,9 +152,26 @@ export default function Header() {
       <div className="font-medium truncate">{currentUser.email}</div>
     </div>
     <a href="/dashboard?tab=profile" className='block py-2 px-4 text-sm hover:font-semibold hover:bg-gray-500 hover:text-white rounded-xl'>Profile</a>
+    {currentUser.isAdmin ?
+        (
+<>
+    <a href="/dashboard?tab=users" className='block py-2 px-4 text-sm hover:font-semibold hover:bg-gray-500 hover:text-white rounded-xl'>Users</a>
+    <a href="/dashboard?tab=userdoc" className='block py-2 px-4 text-sm hover:font-semibold hover:bg-gray-500 hover:text-white rounded-xl'>Service Providers</a>
+    <a href="/dashboard?tab=allbooks" className='block py-2 px-4 text-sm hover:font-semibold hover:bg-gray-500 hover:text-white rounded-xl
+     '>All Bookings</a>
+</>
+):(
+<>
     <a href="/dashboard?tab=documents" className='block py-2 px-4 text-sm hover:font-semibold hover:bg-gray-500 hover:text-white rounded-xl'>Documents</a>
     <a href="/dashboard?tab=mybooking" className='block py-2 px-4 text-sm hover:font-semibold hover:bg-gray-500 hover:text-white rounded-xl
-     border-b-2 border-dashed border-gray-400 last:border-0'>Bookings</a>
+     '>Bookings</a>
+</>
+        )
+        }
+    
+     <div className="border-b-2 border-dashed border-gray-400 last:border-0">
+
+     </div>
     <div className="py-2">
       <div className="block px-4 py-2 text-sm  hover:cursor-pointer hover:bg-red-500 hover:text-white rounded-xl "
       onClick={handleSignout}>Sign out</div>
@@ -156,13 +201,33 @@ export default function Header() {
           <a href="/dashboard?tab=profile" className="block py-2 px-4 hover:font-semibold">
             Profile
           </a>
-          <a href="/dashboard?tab=documents" className="block py-2 px-4 hover:font-semibold">
+          {currentUser.isAdmin ?
+        (
+<>
+<a href="/dashboard?tab=users" className="block py-1 px-4 hover:font-semibold">
+            Users
+          </a>
+<a href="/dashboard?tab=userdoc" className="block py-1 px-4 hover:font-semibold">
+            Service Provider
+          </a>
+          <a href="/dashboard?tab=allbooks" className="block py-1 px-4 hover:font-semibold
+          border-b-2 border-dashed border-gray-400 last:border-0">
+            All Bookings
+          </a>
+</>
+):(
+<>
+        <a href="/dashboard?tab=documents" className="block py-2 px-4 hover:font-semibold">
             Documents
           </a>
           <a href="/dashboard?tab=mybooking" className="block py-2 px-4 hover:font-semibold
           border-b-2 border-dashed border-gray-400 last:border-0">
             Bookings
           </a>
+</>
+        )
+        }
+          
           <div className="py-2">
       <div className="block px-4 py-2 text-sm  hover:cursor-pointer hover:bg-red-500 hover:text-white rounded-xl "
       onClick={handleSignout}>Sign out</div>
