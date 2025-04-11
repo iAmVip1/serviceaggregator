@@ -123,7 +123,7 @@ const handleApplicationDelete = async (applicationId) => {
             </button>
             </Link>
 
-            <Link to='dashboard?tab=documents'>
+            <Link to='tab=documents'>
             
             <button className="bg-red-500 text-white py-2 px-4 rounded mt-5 cursor-pointer hover:bg-red-600"
             onClick={() => handleApplicationDelete(application._id)}>

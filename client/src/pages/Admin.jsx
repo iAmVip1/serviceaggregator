@@ -77,9 +77,7 @@ export default function Admin() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-4 flex items-center justify-between">
-              <OAuth />
-          </div>
+          
           <button
             type="submit"
             className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition disabled:opacity-80" disabled={loading}
@@ -88,6 +86,10 @@ export default function Admin() {
               loading ? 'Loading...' : 'Login'
             }
           </button>
+
+          <div className="mb-4 flex items-center justify-between">
+              <OAuth />
+          </div>
         </form>
         {
             errorMessage && (

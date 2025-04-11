@@ -206,8 +206,7 @@ export default function DashProfile() {
           type="text"
           id="username"
           placeholder="Username"
-          value={formData.username || currentUser.username}
-          onChange={handleChange}
+          defaultValue={currentUser.username} onChange={handleChange}
           className="p-2 border rounded-md w-full"
         />
 
